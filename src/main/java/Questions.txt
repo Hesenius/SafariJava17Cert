@@ -1,0 +1,100 @@
+Q) Which are legal:
+A) class X {
+     var x = 99;
+   }
+B) void doStuff(var x) { }
+C) void doStuff() {
+     var x;
+     x = 100;
+   }
+D) void doStuff() {
+     var x = 100;
+   }
+E) void doStuff() {
+     var x = { 1, 2, 3 };
+
+Q) Which are legal
+A)
+   for (var x = 0; x < 3; x++)
+     System.out.println(x);
+B)
+   try (var in = new FileReader("");
+        var out = new FileWriter("")) {
+   }
+C)
+   var var = "var";
+D) var x = new int[]{1,2,3};
+E) var [] x = new int[]{1,2,3};
+
+Q) Given:
+int x = -1;
+sout(x & 5);
+
+What is the result?
+A) Compilation fails
+B) Exception at runtime
+C) -1
+D) 0x00000005
+E) 5
+
+Q)   Which print "true"
+A) String s = "Hello";
+  String t = "He";
+  t += "llo";
+  sout(s == t);
+B) String s = "Hello";
+  String t = "He";
+  t += "llo";
+  sout(s.equals(t));
+C) StringBuilder s = new StringBuilder("Hello");
+  StringBuilder t = new StringBuilder("He");
+  t.append("llo");
+  sout(s.equals(t));
+D) List<String> ls = List.of("Fred", "Jim");
+  List<String> ls2 = new ArrayList<>(ls);
+  sout(ls.equals(ls2));
+E) LocalDate ld = LocalDate.of(2021, 3, 29);
+  LocalDate ld2 = LocalDate.of(2021, 3, 29);
+  sout(ld.equals(ld2));
+
+Q)
+Given: in another jarfile:
+class X {
+  static String h = "Hello";
+}
+
+Which are true?
+  String s1 = "Hello";
+  String s2 = new StringBuilder("Hello").toString();
+  String s3 = s2.intern();
+
+A) s1 == s2
+B) s2 == s3
+C) s1 == s3
+D) X.h == s1
+E) None of the above
+
+Q) Given:
+    Object obj = "Hello";
+    if (obj instanceof String) {
+      String str = (String)obj;
+      if (str.length() > 3) {
+        System.out.println(str);
+      } else {
+        System.out.println("Too short");
+      }
+    }
+Which is/are equivalent
+A)    System.out.println(obj instanceof String str && str.length() > 3
+        ? str : "Too short");
+B)    if (obj instanceof String str when str.length() > 3)
+        System.out.println(str);
+      else System.out.println("Too short");
+C)    if (obj instanceof String str if str.length() > 3)
+        System.out.println(str);
+      else System.out.println("Too short");
+D)    System.out.println(obj instanceof String.class str && str.length() > 3
+        ? str : "Too short");
+E)    if (obj instanceof String str && str.length() > 3)
+        System.out.println(str);
+      else System.out.println("Too short");
