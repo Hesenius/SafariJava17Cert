@@ -84,6 +84,7 @@ Q) Given:
         System.out.println("Too short");
       }
     }
+
 Which is/are equivalent
 A)    System.out.println(obj instanceof String str && str.length() > 3
         ? str : "Too short");
@@ -98,3 +99,56 @@ D)    System.out.println(obj instanceof String.class str && str.length() > 3
 E)    if (obj instanceof String str && str.length() > 3)
         System.out.println(str);
       else System.out.println("Too short");
+
+Q)
+class Base {
+   void doBaseStuff() { System.out.println("doBaseStuff"); }
+ }
+and:
+ class Sub extends Base {
+   void doBaseStuff() { System.out.println("doSubStuff"); }
+   void doOtherStuff() { System.out.println("doOtherStuff"); }
+ }
+and
+Base b = new Sub(); ((Sub) b).doOtherStuff(); => answer B
+or this one?
+Base b = new Sub(); b.doOtherStuff(); => E
+
+What is the result?
+A) doSubStuff
+B) doOtherStuff
+C) doBaseStuff
+D) Exception at runtime
+E) Compilation failure
+
+
+
+Q) Given:
+enum Day { MONDAY; } ... Day x = Day.MONDAY;
+
+Which is/are valid?
+
+A) int x = 99; while (x) {}
+B) int x = 99; switch (x) {}
+C) switch (x) {
+   case MONDAY: ...
+D) switch (x) {
+   case Day.MONDAY: ...
+E) long count = 99;
+ switch (count) {}
+
+Q) Given:
+String s = "Hello";
+switch (s) {
+    case "Hello" ->
+         System.out.print("Bonjour "); // line n1
+         System.out.print("Guten Tag ");
+    default -> System.out.print("Bye");
+}
+
+Which is true?
+A) The code prints: Bonjour Guten Tag Bye
+B) The code prints: Bonjour Guten Tag
+C) If line n1 is removed the code prints: Guten Tag Bye
+D) If line n1 is removed the code prints: Guten Tag
+E) The code fails to compile
