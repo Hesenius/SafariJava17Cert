@@ -152,3 +152,155 @@ B) The code prints: Bonjour Guten Tag
 C) If line n1 is removed the code prints: Guten Tag Bye
 D) If line n1 is removed the code prints: Guten Tag
 E) The code fails to compile
+
+Q) Given:
+int x = 1;
+// line n1
+switch(x) {
+    case 1: LocalDate.of(2023, x, 1);
+    default: LocalDate.of(2022, 12, 1);
+};
+
+Which is/are true individually?
+A) The code compiles
+B) The code throws an exception at runtime
+C) The code compiles if line n1 is replaced with
+   var d =
+D) The code compiles if the word "yield" is inserted
+   after the colon in both the case and default
+E) The code compiles if the changes of both C and D
+   are applied
+
+Q) Given:
+final String s = "Hello";
+// line n1
+var m =
+switch (s) {
+     // line n2
+     case "Hello" -> "Bonjour";
+};
+System.out.println(m);
+
+Which are true?
+A) Compilation succeeds
+B) The code throws an exception
+C) The code prints Bonjour
+D) The code prints Salut if this line is added at line n2
+  case String -> "Salut";
+E) The code prints Bonjour if this line is added at line n2
+  default -> "Unknown";
+
+Q) Given:
+   short s = 8;
+   System.out.println(switch (s) { // line n1
+     // line n2
+     default -> "It's something else";
+   });
+Which are true?
+A) Compilation fails at line n1
+B) The code runs and prints It's something else
+C) Adding at line n2
+  case 2,4,6,8 -> "Even < 10";
+  gives the output Even < 10
+D) Adding at line n2
+  case 2|4|6|8 -> "Even < 10";
+  gives the output Even < 10
+E) Adding at line n2
+  case 2 -> case 4 -> case 6 -> case 8 -> "Even < 10";
+  gives the output Even < 10
+
+Q) Given:
+       var x = 10;
+       var res = switch(x) {
+         case 10 -> x; // line n1
+         default -> "It's not ten"; };
+   Which is/are true?
+A) The code fails to compile
+B) The type of res can only be expressed fully using var
+C) Changing line n1 to:
+  System.out.println("x is ten");
+  return x;
+  causes printing of the message x is ten
+D) Changing line n1 to:
+  { System.out.println("x is ten"); x; }
+  causes printing of the message x is ten
+E) Changing line n1 to:
+  System.out.println("x is ten");
+  yield x;
+  causes printing of the message x is ten
+
+Q) Given:
+class MyException extends Exception {}
+and:
+static void mightBreak() throws IOException, FileNotFoundException, SQLException {}
+and:
+ void caller() throws Throwable {
+   try {
+     mightBreak();
+   }
+   catch (IOException e) {}
+   // line n1
+ }
+What can be added at line n1?
+A) catch (IOException e) {}
+B) catch (FileNotFoundException e) {}
+C) catch (SQLException e) {}
+D) catch (Exception e) {}
+E) catch (MyException e) {}
+
+Q) Given
+ void doStuff() throws IOException {};
+ void doStuff2() throws FileNotFoundException {};
+And:
+ void tryStuff() {
+   try {
+     doStuff();
+     doStuff2();
+   } enter code here {
+     // handle both exceptions
+   }
+ }
+What can be inserted at "enter code here"
+to provide handling of exceptions from both
+methods?
+A) catch (IOException | FileNotFoundException e)
+B) catch (FileNotFoundException | IOException e)
+C) catch (FileNotFoundException e)
+D) catch (IOException e)
+E) finally
+
+Q) Given:
+   try (var fr = new FileReader("main.txt"); // line n1
+       var br = new BufferedReader(fr);){ // line n2
+     if (!br.ready()) {
+       br = new BufferedReader(new FileReader("backup.txt")); // line n3
+     }
+     String line;
+     while ((line = br.readLine()) != null)
+       System.out.println(">> " + line);
+   }
+
+What is the result?
+A) Compilation fails at line n1
+B) Compilation fails at line n2
+C) Compilation fails at line n3
+D) If main.txt is readable, its contents are shown,
+  but if not, the contents of backup.txt are shown
+E) If main.txt is readable, its contents are shown
+  but if not, the program exits with an unhandled exception
+
+Q) Given:
+   class AC4 implements AutoCloseable {
+     public void close() throws Exception { throw new SQLException(); }
+   }
+And:
+   try ( var one = new AC3();
+       var two = new AC3(); ){
+     throw new FileNotFoundException();
+   }
+Which are true?
+A) Compilation fails
+B) A FileNotFoundException is thrown to the caller
+C) An SQLException is thrown to the caller
+D) close methods of resources "one" and "two" are called
+E) close methods of resources "one" and "two" are not both called
