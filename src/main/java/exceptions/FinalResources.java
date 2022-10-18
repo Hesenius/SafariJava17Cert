@@ -15,5 +15,6 @@ public class FinalResources {
       while ((line = br.readLine()) != null)
         System.out.println(">> " + line);
     }
+//    fr.close();
   }
 }

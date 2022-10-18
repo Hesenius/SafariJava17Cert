@@ -290,7 +290,7 @@ E) If main.txt is readable, its contents are shown
   but if not, the program exits with an unhandled exception
 
 Q) Given:
-   class AC4 implements AutoCloseable {
+   class AC3 implements AutoCloseable {
      public void close() throws Exception { throw new SQLException(); }
    }
 And:
@@ -304,3 +304,118 @@ B) A FileNotFoundException is thrown to the caller
 C) An SQLException is thrown to the caller
 D) close methods of resources "one" and "two" are called
 E) close methods of resources "one" and "two" are not both called
+
+Q) Given:
+void doStuff(int x, int y) {}         // Method A
+void doStuff(int x, long y) {}        // Method B
+void doStuff(long x, int y) {}        // Method C
+void doStuff(int ... x) {}            // Method D
+void doStuff(Integer x, Integer y) {} // Method E
+and:
+void tryStuff() {
+  doStuff(1, 2);
+}
+
+Given all five methods exist, which is invoked by the invocation
+in the body of method tryStuff()?
+
+Q) Given:
+void doStuff(int x, long y) {}        // Method B
+void doStuff(long x, int y) {}        // Method C
+void doStuff(int ... x) {}            // Method D
+void doStuff(Integer x, Integer y) {} // Method E
+A) compilation fails
+and:
+void tryStuff() {
+  doStuff(1, 2);
+}
+
+What is the result?
+
+Q) Given:
+void doStuff(int ... x) {}            // Method D
+void doStuff(Integer x, Integer y) {} // Method E
+A) compilation fails
+and:
+void tryStuff() {
+  doStuff(1, 2);
+}
+
+What is the result?
+
+Q) Given:
+ public static void q14A(Integer x) {
+   x = x + 1;
+ }
+
+and:
+ public static void main(String[] args) {
+   Integer x = 99;
+   q14A(x);
+   System.out.println(x);
+ }
+
+What is the result?
+A) 99
+B) 100
+C) An error
+
+Q) Given:
+ public static void q12A(StringBuilder x) {
+   x.append(" world");
+ }
+
+and:
+ public static void main(String[] args) {
+   StringBuilder x = new StringBuilder("Hello");
+   q12A(x);
+   System.out.println(x);
+ }
+
+ What is the result?
+ A) Hello
+ B) Hello world
+ C)  world
+ D) An error
+
+Q) Given:
+enum Day {
+    MONDAY(1), TUESDAY;
+    public Day(int d) {}
+    public Day() {}
+}
+and:
+sout(Day.MONDAY)
+
+What is the result?
+A) 1
+B) MONDAY
+C) Day.MONDAY
+D) Exception at runtime
+E) Compilation fails
+
+Q) Given:
+enum Suit { HEARTS, DIAMONDS, CLUBS, SPADES;
+  boolean isTrumps() { return this == HEARTS; }
+}
+
+Which is/are true?
+A) isTrumps is implicitly static
+B) isTrumps can be marked final
+C) if it's necessary to prevent isTrumps being overridden,
+   it should be marked final
+D) isTrumps fails to compile
+E) none of the above
+
+Q: Given:
+enum X {
+  A, B;
+  // line n1
+}
+
+Which can be added at line n1?
+A) @Override public String toString() { return name().toUpperCase(); }
+B) public String toString() { return name().toUpperCase(); }
+C) public String name() { return super.name().toUpperCase(); }
+D) public static String name(X x) { return x.name().toUpperCase(); }
+E) none of the above
