@@ -7,7 +7,7 @@ final class P implements X {}
 sealed class Q implements X permits R {}
 final class R extends Q {}
 record T() implements X {}
-enum U {}
+enum U implements X {}
 
 public class Ex1 {
 }
