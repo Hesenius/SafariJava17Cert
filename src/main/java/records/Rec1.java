@@ -33,6 +33,13 @@ public record Rec1(String x, int y/*, StringBuilder sb*/)
     x = x.toUpperCase();
 //    this.x = x; // NONONO this is the job of the canonical constructor
   }
+
+  @Override // not really an override, there's no "super" version
+  public int y() {
+      return this.y;
+  }
+  public int getDiscount() { return y / 10; }
+
   static class ClientSupport {}
 }
 

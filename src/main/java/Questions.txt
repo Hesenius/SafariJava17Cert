@@ -521,3 +521,142 @@ C)  Customer {
    }
 D)  static {}
 E)  {}
+
+Q) Given:
+record SalesItem(String description, int price) {
+     // line n1
+}
+Which can be added individually at line n1?
+A) private int stockOnHand
+B) @Override public int price() { return price; }
+C) @Override public int price() { return super.price() + 10; }
+D) static String ourStore;
+E) public int getDiscount() { return price / 10; }
+
+Q) Given:
+   class Base {
+       void doBaseStuff() {
+         System.out.println("doBaseStuff");
+       }
+     }
+     class Sub extends Base {
+       void doBaseStuff() {
+         System.out.println("doSubStuff");
+       }
+       void doOtherStuff() {
+         System.out.println("doOtherStuff");
+       }
+     }
+In the Base and Sub classes, which are true in isolation?
+A) doBaseStuff in Base can be marked public without causing errors
+B) doBaseStuff in Base can be marked private without causing errors
+C) doBaseStuff in Sub can be marked public without causing errors
+D) doBaseStuff in Sub can be marked protected without causing errors
+E) doBaseStuff in Sub can be marked private without causing errors
+
+Q) Given:
+ class Base {
+   void doBaseStuff() { System.out.println("doBaseStuff"); }
+ }
+ class Sub extends Base {
+   void doBaseStuff() { System.out.println("doSubStuff"); }
+ }
+
+In the Base and Sub classes, which are true in isolation?
+
+A) doBaseStuff in Base can be marked throws Exception without causing errors
+B) doBaseStuff in Base can be marked throws RuntimeException without causing errors
+C) doBaseStuff in Sub can be marked throws Exception without causing errors
+D) doBaseStuff in Sub can be marked throws RuntimeException without causing errors
+E) if doBaseStuff in Base were marked throws Exception,
+  then doBaseStuff in Sub can be marked throws IOException without causing errors
+
+Q)  Given:
+ class Q24Base {
+   public int get() {
+     return 0;
+   }
+ }
+
+ class Q24Sub extends Q24Base {}
+
+Which methods may individually be added to Q24Sub?
+A) public long get() { return 1; }
+B) public short get() { return 1; }
+C) public Q24Base get() { return null; }
+D) None of these
+
+Q) Given:
+String message = """
+    Hello
+        Java 17 World!""";
+System.out.println(message + "XXX");
+
+What is the result?
+A) Hello
+   Java 17 World!XXX
+B) Hello
+       Java 17 World!XXX
+C) Hello
+   Java 17 World!
+   XXX
+D)     Hello
+           Java 17 World!
+   XXX
+
+Q) Given:
+
+String message = """Hello\
+Java 17 World!""";
+System.out.println(message + "XXX");
+
+What is the result?
+A) Compilation fails
+B) Exception at runtime
+C) Hello
+   Java 17 World!XXX
+D) Hello Java 17 World!XXX
+E) Hello Java 17 World!
+   XXX
+
+Q) Given:
+interface ArbInter {}
+final class Y implements X {}
+sealed interface X /* point x */{}
+// line n1
+Which is/are true?
+A) the code compiles as it stands
+B) the code compiles if the following is added at point x
+permits Y, Z
+AND this is added at line 1
+class Z implements X {}
+C) the code compiles if the following is added at point x
+permits Y, Z
+AND this is added at line 1
+record Z(String name) implements X {}
+D) the code compiles if the following is added at point x
+  permits Y extends ArbInter
+E) the code compiles if the following is added at line n1
+non-sealed abstract class Z implements X permits Q {}
+final class Q extends Z {}
+
+Q) Given:
+---file: mypkg/S1.java---
+package mypkg;
+sealed class S1 /* point x */ {}
+---file: mypkg/S2.java---
+package mypkg;
+final class F1 extends S1 {}
+   Which is/are true?
+A) The code compiles as is
+B) The code compiles after adding the following at point x
+    permits F1
+C) If a file otherpkg.F2 contains:
+    package otherpkg;
+    final class F2 extends F1
+  and:
+    permits F1, F2 is added to point x
+  then the code definitely compiles
+D) If the additions of C) above are made and the code is
+  entirely in a single module, then the code definitely compiles
+E) none of the above
