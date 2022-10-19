@@ -419,3 +419,105 @@ B) public String toString() { return name().toUpperCase(); }
 C) public String name() { return super.name().toUpperCase(); }
 D) public static String name(X x) { return x.name().toUpperCase(); }
 E) none of the above
+
+Q) Given:
+     int len = 3;
+       Predicate<String> ps = new Predicate<String>() {
+         @Override
+         public boolean test(String s) {
+           return s.length() > len; // line n1
+         }
+       };
+       // line n2
+     }
+  Which are true?
+A) The code compiles
+B) Compilation fails due to a problem at line n1
+C) adding the code
+  System.out.println("testing lines " + (++len));
+  at line n2 is OK
+
+Q) Given:
+class Outer1 {
+  class Inner1 { private int y = 100;
+    // line n1
+  }
+  private int x = 99;
+  // line n2
+}
+and these method proposals:
+void showX() { sop("x is " + x); }
+void showY() { sop("y is " + y); }
+void showAnotherY(Inner1 another) { sop("y is " + another.y); }
+static Inner1 makeOne() { return new Inner1(); }
+Which is/are true?
+A) showX can be added at line n1
+B) showY can be added at line n2
+C) showAnotherY can be added at line n2
+D) makeOne can be added at line n1
+E) makeOne can be added at line n2
+
+Q) Given
+   class Outer {
+     class Inner {
+     }
+   }
+
+Which create an instance of Inner?
+A) new Inner();
+B) new Outer.Inner();
+C) Outer ou = new Outer(); new ou.Inner();
+D) new Outer().new Inner();
+E) new Outer() { new Inner(); }
+
+Q) Given:
+class Outer2 {
+  class Inner2 {
+    // line n1
+  }
+}
+
+Which can be added individually at line n1
+A) Inner2(Outer2 Outer2.this){}
+B) Inner2(Outer2 that){}
+C) Inner2(Outer2 this){}
+D) Inner2(Inner2 this) {}
+E) void doStuff(Inner2 this) {}
+
+Q) Given:
+  record Client(String name, int creditLimit) {
+     // line n1
+  }
+
+A) At line n1
+   public Client(String name) { this(name, 0); }
+B) at line n1
+   public Client(String name, int creditLimit) {
+     super();
+     this.name = name;
+     this.creditLimit = creditLimit; }
+C) as a separate declaration:
+   record SpecialClient(String name, int creditLimit, String greeting)
+     extends Client(name, creditLimit) {}
+D) at line n1: private Client() { this("Unknown", 0); }
+E) at line n1: class ClientSupport {}
+
+Q) Given:
+record Customer(String name, int id) {
+     // line n1
+}
+Which are valid at line n1?
+A)  Customer(String name, int id) {
+     this.name = "Mx. " + name;
+   }
+B)  Customer {
+     this.name = name;
+     this.id = id;
+   }
+C)  Customer {
+     if (name == null || name.length() == 0 || id < 1)
+       throw new IllegalArgumentException("Bad Customer values");
+     name = "Mr/Mrs/Ms " + name;
+   }
+D)  static {}
+E)  {}
